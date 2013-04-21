@@ -1,5 +1,20 @@
 from pilkit.lib import Image, ImageColor, ImageEnhance
 
+class Processor(object):
+    """
+    Base processor class
+    """
+    def get_hash_attributes(self):
+        attrs = {'class_name': self.__class__.__name__}
+
+        try:
+            for attr_name in self.hash_attributes:
+                attrs[attr_name] = getattr(self, attr_name)
+        except AttributeError:
+            raise AttributeError('Processor classes require a \'hash_attributes\' list attribute')
+
+        return attrs
+
 
 class ProcessorPipeline(list):
     """

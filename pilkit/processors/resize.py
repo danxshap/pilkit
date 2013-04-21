@@ -1,4 +1,4 @@
-from .base import Anchor
+from .base import Processor, Anchor
 from ..lib import Image
 
 
@@ -189,7 +189,7 @@ class AddBorder(object):
                 x=self.left, y=self.top).process(img)
 
 
-class ResizeToFit(object):
+class ResizeToFit(Processor):
     """
     Resizes an image to fit within the specified dimensions.
 
@@ -211,6 +211,7 @@ class ResizeToFit(object):
         self.upscale = upscale
         self.mat_color = mat_color
         self.anchor = anchor
+        self.hash_attributes = ['width', 'height', 'upscale', 'mat_color', 'anchor']
 
     def process(self, img):
         cur_width, cur_height = img.size
